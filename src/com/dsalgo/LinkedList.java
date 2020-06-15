@@ -1,6 +1,7 @@
 package com.dsalgo;
 
 import java.util.NoSuchElementException;
+import java.util.Stack;
 
 public class LinkedList {
     private class Node {
@@ -313,6 +314,42 @@ public class LinkedList {
 
         node.val = node.next.val;
         node.next = node.next.next;
+    }
+
+    public boolean checkIfLinkedListPalindrome() {
+        return checkIfLinkedListPalindrome(head);
+    }
+
+    private boolean checkIfLinkedListPalindrome(Node head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        Node slow, fast;
+        slow = fast = head;
+
+        Stack<Node> s = new Stack<Node>();
+        s.push(slow);
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            s.push(slow);
+        }
+
+        if (fast.next == null) {
+            s.pop();
+        }
+
+        Node secondHalf = slow.next;
+
+        while (secondHalf != null) {
+            if (s.pop().val != secondHalf.val) {
+                return false;
+            }
+            secondHalf = secondHalf.next;
+        }
+        return true;
     }
 
     public int getSize() {

@@ -360,6 +360,28 @@ public class LinkedList {
         return head == null;
     }
 
+    public void nthNodeFromEnd(int n) {
+        nthNodeFromEnd(head, n);
+    }
+
+    private void nthNodeFromEnd(Node head, int n) {
+        if (head == null)
+            return;
+
+        var slow = head;
+        var fast = head;
+
+        while (fast.next != null) {
+            fast = fast.next;
+            if (n-- <= 0) {
+                slow = slow.next;
+            }
+        }
+
+        assert slow.next != null;
+        slow.next = slow.next.next;
+    }
+
     public void display() {
         var current = head;
         System.out.println();

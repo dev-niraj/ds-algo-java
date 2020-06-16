@@ -1,5 +1,8 @@
 package com.dsalgo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tree {
     private class Node {
         private int val;
@@ -181,6 +184,25 @@ public class Tree {
 
         return isBinarySearchTree(root.left, min, root.val - 1)
                 && isBinarySearchTree(root.right, root.val + 1, max);
+    }
+
+    public ArrayList<Integer> NodesAtKDistance(int distance) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        NodesAtKDistance(root, distance, list);
+        return list;
+    }
+
+    private void NodesAtKDistance(Node root, int distance, ArrayList<Integer> list) {
+        if (root == null)
+            return;
+
+        if (distance == 0) {
+            list.add(root.val);
+            return;
+        }
+
+        NodesAtKDistance(root.left, distance - 1, list);
+        NodesAtKDistance(root.right, distance - 1, list);
     }
 
     private boolean isLeaf(Node node) {

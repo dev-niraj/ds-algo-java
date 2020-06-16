@@ -162,6 +162,27 @@ public class Tree {
         return false;
     }
 
+    public void swapNode() {
+        var temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+    }
+
+    public boolean isBinarySearchTree() {
+        return isBinarySearchTree(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private boolean isBinarySearchTree(Node root, int min, int max) {
+        if (root == null)
+            return true;
+
+        if (root.val < min || root.val > max)
+            return false;
+
+        return isBinarySearchTree(root.left, min, root.val - 1)
+                && isBinarySearchTree(root.right, root.val + 1, max);
+    }
+
     private boolean isLeaf(Node node) {
         return node.left == null && node.right == null;
     }

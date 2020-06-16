@@ -145,8 +145,24 @@ public class Tree {
         return Math.min(Math.min(left, right), root.val);
     }
 
+    public boolean isEqual(Tree other) {
+        return isEqual(root, other.root);
+    }
+
+    private boolean isEqual(Node first, Node second) {
+        if (first == null && second == null)
+            return true;
+
+        if (first != null && second != null) {
+            return first.val == second.val &&
+                    isEqual(first.left, second.left) &&
+                    isEqual(first.right, second.right);
+        }
+
+        return false;
+    }
+
     private boolean isLeaf(Node node) {
         return node.left == null && node.right == null;
     }
-
 }

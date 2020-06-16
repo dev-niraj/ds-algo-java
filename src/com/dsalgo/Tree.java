@@ -111,10 +111,42 @@ public class Tree {
         if (root == null)
             return -1;
 
+        if (isLeaf(root))
+            return -1;
+
         return 1 + Math.max(
                 height(root.left),
                 height(root.right)
         );
+    }
+
+    public int min() {
+        if (root == null)
+            throw new IllegalStateException();
+
+        var current = root;
+        var last = current;
+
+        while (current != null) {
+            last = current;
+            current = current.left;
+        }
+
+        return last.val;
+    }
+
+    private int min(Node root) {
+        if (isLeaf(root))
+            return root.val;
+
+        var left = min(root.left);
+        var right = min(root.right);
+
+        return Math.min(Math.min(left, right), root.val);
+    }
+
+    private boolean isLeaf(Node node) {
+        return node.left == null && node.right == null;
     }
 
 }

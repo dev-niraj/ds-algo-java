@@ -103,4 +103,18 @@ public class Tree {
         System.out.print(root.val + " ");
     }
 
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node root) {
+        if (root == null)
+            return -1;
+
+        return 1 + Math.max(
+                height(root.left),
+                height(root.right)
+        );
+    }
+
 }

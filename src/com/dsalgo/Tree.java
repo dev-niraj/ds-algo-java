@@ -186,13 +186,13 @@ public class Tree {
                 && isBinarySearchTree(root.right, root.val + 1, max);
     }
 
-    public ArrayList<Integer> NodesAtKDistance(int distance) {
+    public ArrayList<Integer> getNodesAtKDistance(int distance) {
         ArrayList<Integer> list = new ArrayList<Integer>();
-        NodesAtKDistance(root, distance, list);
+        getNodesAtKDistance(root, distance, list);
         return list;
     }
 
-    private void NodesAtKDistance(Node root, int distance, ArrayList<Integer> list) {
+    private void getNodesAtKDistance(Node root, int distance, ArrayList<Integer> list) {
         if (root == null)
             return;
 
@@ -201,8 +201,16 @@ public class Tree {
             return;
         }
 
-        NodesAtKDistance(root.left, distance - 1, list);
-        NodesAtKDistance(root.right, distance - 1, list);
+        getNodesAtKDistance(root.left, distance - 1, list);
+        getNodesAtKDistance(root.right, distance - 1, list);
+    }
+
+    public void traverseLevelOrder() {
+        for (var i = 0; i <= height(); i++) {
+            for(var value : getNodesAtKDistance(i)) {
+                System.out.println(value);
+            }
+        }
     }
 
     private boolean isLeaf(Node node) {

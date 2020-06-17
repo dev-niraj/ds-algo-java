@@ -1,5 +1,6 @@
 package com.dsalgo;
 
+import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -211,6 +212,22 @@ public class Tree {
                 System.out.println(value);
             }
         }
+    }
+
+    public void sortedArrayToBST(int[] nums) {
+        root = dfs(nums, 0, nums.length - 1);
+    }
+
+    private Node dfs(int[] nums, int start, int end) {
+        if (end < start) {
+            return null;
+        }
+
+        int mid = (start + end) / 2;
+        Node root = new Node(nums[mid]);
+        root.left = dfs(nums, start, mid - 1);
+        root.right = dfs(nums, mid + 1, end);
+        return root;
     }
 
     private boolean isLeaf(Node node) {

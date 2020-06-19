@@ -1,16 +1,13 @@
 package com.dsalgo;
 
 public class Main {
-    public static void main(String[] args) {
-        var list = new LinkedList();
-        list.addFirst(10);
-        list.addLast(20);
-        list.addLast(30);
-        list.addLast(40);
-        list.addLast(50);
+    public static void main (String[] args) {
+        int arr[] = { 5, 9, 7, 6 };
+        int n = arr.length;
 
-        list.deleteOnlyGivenNode();
+        var sum = new pairOfSum();
 
-        list.display();
+        System.out.println(sum.addition(10, 10));
     }
+
 }

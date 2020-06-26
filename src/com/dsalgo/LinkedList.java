@@ -1,5 +1,6 @@
 package com.dsalgo;
 
+import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
@@ -15,6 +16,8 @@ public class LinkedList {
     private Node head;
     private Node last;
     private int size;
+    int max = Integer.MIN_VALUE;
+    int min = Integer.MAX_VALUE;
 
     public void addLast(int item) {
         var node = new Node(item);
@@ -141,7 +144,24 @@ public class LinkedList {
         return a.value;
     }
 
+    public void getMaxMin() {
+        if (isEmpty())
+            throw new IllegalStateException();
 
+        var current = head;
+
+        while (current != null) {
+            if(current.value > max) {
+                max = current.value;
+            }
+
+            if(current.value < min) {
+                min = current.value;
+            }
+
+            current = current.next;
+        }
+    }
 
     public int getSize() {
         return size;

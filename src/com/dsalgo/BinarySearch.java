@@ -2,7 +2,8 @@ package com.dsalgo;
 
 public class BinarySearch {
     public int binarySearchI(int[] nums, int x) {
-        int l = 0, r = nums.length - 1;
+        int l = 0;
+        int r = nums.length - 1;
         while (l <= r) {
             int m = l + (r - l) / 2;
 

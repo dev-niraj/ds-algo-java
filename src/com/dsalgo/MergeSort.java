@@ -1,20 +1,21 @@
 package com.dsalgo;
 
+import java.util.Arrays;
+
 public class MergeSort {
     public void sort(int[] array) {
-        if (array.length < 2) {
+        if (array.length < 2)
             return;
-        }
 
         int middle = array.length / 2;
 
         int[] left = new int[middle];
-        for(var i = 0; i < middle; i++) {
+        for(int i = 0; i < middle; i++) {
             left[i] = array[i];
         }
 
         int[] right = new int[array.length - middle];
-        for(var i = middle; i < array.length; i++) {
+        for(int i = middle; i < array.length; i++) {
             right[i - middle] = array[i];
         }
 
@@ -22,17 +23,16 @@ public class MergeSort {
         sort(right);
 
         merge(left, right, array);
+
     }
 
     private void merge(int[] left, int[] right, int[] result) {
         int i = 0, j = 0, k = 0;
-
         while (i < left.length && j < right.length) {
-            if (left[i] <= right[j]) {
+            if (left[i] < right[j])
                 result[k++] = left[i++];
-            } else {
+            else
                 result[k++] = right[j++];
-            }
         }
 
         while (i < left.length) {

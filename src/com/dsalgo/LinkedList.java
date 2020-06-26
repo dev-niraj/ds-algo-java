@@ -163,6 +163,58 @@ public class LinkedList {
         }
     }
 
+    public void deleteLargestElement() {
+        if (head == null || head.next == null)
+            throw new IllegalStateException();
+
+        var node = head;
+
+        Node prevLargest, largest, current, prev;
+        current = largest = node;
+        prevLargest = null;
+        prev = node;
+        node = node.next;
+
+        while (node != null) {
+            if (node.value > largest.value) {
+                prevLargest = prev;
+                largest = node;
+            }
+
+            prev = node;
+            node = node.next;
+        }
+
+        if (current == largest) {
+            current = current.next;
+        } else {
+            prevLargest.next = largest.next;
+        }
+    }
+
+    public void createLoop() {
+        head.next.next.next.next.next.next.next = head.next.next;
+    }
+
+    public boolean isLoop() {
+        if (isEmpty())
+            throw new IllegalStateException();
+
+        var slow = head;
+        var fast = head;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public int getSize() {
         return size;
     }

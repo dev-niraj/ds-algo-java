@@ -291,6 +291,22 @@ public class LinkedList {
         ptr2.next = null;
     }
 
+    public void deleteMiddleNode() {
+        if (head == null || head.next == null)
+            throw new IllegalStateException();
+
+        Node slow, fast, prev;
+        slow = fast = prev = head;
+
+        while (fast != null && fast.next != null) {
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        prev.next = slow.next;
+    }
+
 
     public int getSize() {
         return size;

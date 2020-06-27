@@ -215,6 +215,83 @@ public class LinkedList {
         return false;
     }
 
+    public int lengthOfLoop() {
+        if (isEmpty())
+            throw new IllegalStateException();
+
+        var slow = head;
+        var fast = head;
+        int length = 0;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast) {
+                break;
+            }
+        }
+
+        if (slow == fast) {
+            while (slow.next != fast) {
+                slow = slow.next;
+                length++;
+            }
+            length++;
+        }
+
+        return length;
+    }
+
+    public boolean detectAndRemoveLoop() {
+        if (isEmpty())
+            throw new IllegalStateException();
+
+        var slow = head;
+        var fast = head;
+
+        while (slow != null && fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast) {
+                removeLoop(slow, head);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void removeLoop (Node loop, Node head) {
+        Node ptr1 = loop;
+        Node ptr2 = loop;
+
+        int k = 1, i;
+        while (ptr1.next != ptr2) {
+            ptr1 = ptr1.next;
+            k++;
+        }
+
+        ptr1 = head;
+        ptr2 = head;
+
+        for(i = 0; i < k; i++) {
+            ptr2 = ptr2.next;
+        }
+
+        while (ptr2 != ptr1) {
+            ptr1 = ptr1.next;
+            ptr2 = ptr2.next;
+        }
+
+        while (ptr2.next != ptr1) {
+            ptr2 = ptr2.next;
+        }
+
+        ptr2.next = null;
+    }
+
+
     public int getSize() {
         return size;
     }

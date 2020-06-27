@@ -307,6 +307,39 @@ public class LinkedList {
         prev.next = slow.next;
     }
 
+    public boolean ifPalindrome() {
+        if (head == null || head.next == null)
+            throw new IllegalStateException();
+
+        Node slow, fast;
+        slow = fast = head;
+
+        Stack<Node> stack = new Stack<Node>();
+        stack.push(slow);
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            stack.push(slow);
+        }
+
+        if (fast.next == null) {
+            stack.pop();
+        }
+
+        Node secondHalf = slow.next;
+
+        while (secondHalf != null) {
+            if (stack.pop().value != secondHalf.value) {
+                return false;
+            }
+
+            secondHalf = secondHalf.next;
+        }
+
+        return true;
+    }
+
 
     public int getSize() {
         return size;

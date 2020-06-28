@@ -401,6 +401,27 @@ public class LinkedList {
         }
     }
 
+    public void mergeTwoSortedArray(LinkedList node) {
+        var node2 = node.head;
+        head = mergeTwoSortedArray(this.head, node2);
+    }
+
+    private Node mergeTwoSortedArray(Node h1, Node h2) {
+        if (h1 == null)
+            return h2;
+
+        if (h2 == null)
+            return h1;
+
+        if (h1.value < h2.value) {
+            h1.next = mergeTwoSortedArray(h1.next, h2);
+            return h1;
+        } else {
+            h2.next = mergeTwoSortedArray(h1, h2.next);
+            return h2;
+        }
+    }
+
 
     public int getSize() {
         return size;

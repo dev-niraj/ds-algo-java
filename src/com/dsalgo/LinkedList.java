@@ -340,6 +340,21 @@ public class LinkedList {
         return true;
     }
 
+    public void passNode() {
+        if (isEmpty())
+            throw new IllegalStateException();
+
+        deleteGivenNode(head.next.next.next);
+    }
+
+    private void deleteGivenNode(Node node) {
+        if (node == null || node.next == null)
+            throw new IllegalStateException();
+
+        node.value = node.next.value;
+        node.next = node.next.next;
+    }
+
 
     public int getSize() {
         return size;

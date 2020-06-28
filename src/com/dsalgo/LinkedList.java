@@ -355,6 +355,52 @@ public class LinkedList {
         node.next = node.next.next;
     }
 
+    public void deleteLastOccurrenceOfItem (int val) {
+        var current = head;
+        Node x = null;
+        Node temp = head;
+
+        while (temp != null) {
+            if (temp.value == val) {
+                x = temp;
+            }
+            temp = temp.next;
+        }
+
+        if (x != null) {
+            x.value = x.next.value;
+            temp = x.next;
+            x.next = x.next.next;
+        }
+    }
+
+    public void sortAbsoluteValue() {
+        if (head == null || head.next == null)
+            return;
+
+        Node next, node, prev;
+        node = next = head;
+        prev = null;
+
+        if (head.value < 0) {
+            prev = node;
+            node = node.next;
+        }
+
+        while (node != null) {
+            if (node.value < 0) {
+                prev.next = node.next;
+                next = node.next;
+                node.next = head;
+                head = node;
+                node = next;
+            } else {
+                prev = node;
+                node = node.next;
+            }
+        }
+    }
+
 
     public int getSize() {
         return size;
